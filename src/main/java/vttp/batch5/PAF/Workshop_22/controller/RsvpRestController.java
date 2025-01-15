@@ -1,5 +1,6 @@
 package vttp.batch5.PAF.Workshop_22.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,9 +39,9 @@ public class RsvpRestController {
 
     @GetMapping("/rsvp")
     @ResponseBody
-    public ResponseEntity<?> getRsvpByName(@RequestParam(required = true) String name) {
+    public ResponseEntity<?> getRsvpByID(@RequestParam(required = true) String id) {
 
-        Optional<Person> rsvp = rsvpService.getRSVPByName(name);
+        Optional<Person> rsvp = rsvpService.getRSVPByid(id);
 
         if (rsvp.isPresent()) {
             return ResponseEntity.ok().body(rsvp);
@@ -68,13 +69,14 @@ public class RsvpRestController {
     public ResponseEntity<?> addNewRsvp(@RequestParam String name,
             @RequestParam String email,
             @RequestParam String phone,
-            @RequestParam String confirmDate,
+            @RequestParam Date confirmDate,
             @RequestParam String comments) {
 
         log.info("Received POST request to add or update RSVP for email: {}", email);
         log.info("Parameters - name: {}, phone: {}, confirmDate: {}, comments: {}", name, phone, confirmDate, comments);
 
-        if (rsvpService.addOrUpdateRsvp(name, email, phone, confirmDate, comments)) {
+        boolean isAdded = rsvpService.addOrUpdateRsvp(name, email, phone, confirmDate, comments);
+        if (isAdded) {
             return ResponseEntity.status(201).body("Rsvp added or updated.");
         }
 
@@ -86,7 +88,7 @@ public class RsvpRestController {
     public ResponseEntity<?> updateRsvp(@PathVariable String email,
             @RequestParam String name,
             @RequestParam String phone,
-            @RequestParam String confirmDate,
+            @RequestParam Date confirmDate,
             @RequestParam String comments) {
 
         log.info("Received PUT request to update RSVP for email: {}", email);

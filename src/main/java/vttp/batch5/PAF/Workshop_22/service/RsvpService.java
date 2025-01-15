@@ -1,5 +1,6 @@
 package vttp.batch5.PAF.Workshop_22.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,22 +20,22 @@ public class RsvpService {
         return rsvpRepo.getAllRSVP();
     }
 
-    public Optional<Person> getRSVPByName(String name) {
-        return rsvpRepo.getRSVPByName(name);
+    public Optional<Person> getRSVPByid(String id) {
+        return rsvpRepo.getRSVPById(id);
     }
 
-    public boolean addOrUpdateRsvp(String name, String email, String phone, String confirmDate, String comments) {
+    public boolean addOrUpdateRsvp(String id, String email, String phone, Date confirmDate, String comments) {
         if (rsvpRepo.rsvpExists(email)) {
             // Update existing RSVP
-            return rsvpRepo.updateRsvp(name, phone, confirmDate, comments, email);
+            return rsvpRepo.updateRsvp(id, phone, confirmDate, comments, email);
         } else {
             // Insert new RSVP
-            return rsvpRepo.insertNewRsvp(name, email, phone, confirmDate, comments);
+            return rsvpRepo.insertNewRsvp(id, email, phone, confirmDate, comments);
         }
     }
 
-    public boolean updateRsvp(String name, String phone, String confirmDate, String comments, String email) {
-        return rsvpRepo.updateRsvp(name, phone, confirmDate, comments, email);
+    public boolean updateRsvp(String id, String phone, Date confirmDate, String comments, String email) {
+        return rsvpRepo.updateRsvp(id, phone, confirmDate, comments, email);
     }
 
     public Integer getTotalRsvp() {

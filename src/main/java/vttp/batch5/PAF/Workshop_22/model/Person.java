@@ -1,22 +1,16 @@
 package vttp.batch5.PAF.Workshop_22.model;
 
+import java.util.Date;
+
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 public class Person {
 
-    private String name;
+    private String id;
     private String email;
     private String phone;
-    private String confirmDate;
+    private Date confirmDate;
     private String comments;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getEmail() {
         return email;
@@ -34,11 +28,11 @@ public class Person {
         this.phone = phone;
     }
 
-    public String getConfirmDate() {
+    public Date getConfirmDate() {
         return confirmDate;
     }
 
-    public void setConfirmDate(String confirmDate) {
+    public void setConfirmDate(Date confirmDate) {
         this.confirmDate = confirmDate;
     }
 
@@ -52,13 +46,21 @@ public class Person {
 
     public static Person toPerson(SqlRowSet rs) {
         Person person = new Person();
-        person.setName(rs.getString("name"));
+        person.setId(rs.getString("id"));
         person.setEmail(rs.getString("email"));
         person.setPhone(rs.getString("phone"));
-        person.setConfirmDate(rs.getString("confirmDate"));
+        person.setConfirmDate(rs.getDate("confirmDate"));
         person.setComments(rs.getString("comments"));
 
         return person;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 }

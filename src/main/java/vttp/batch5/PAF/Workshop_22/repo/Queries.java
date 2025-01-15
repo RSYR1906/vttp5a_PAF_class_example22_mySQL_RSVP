@@ -7,13 +7,13 @@ public class Queries {
 
             """;
 
-    public static final String SQL_SELECT_RSVP_BY_NAME = """
-            SELECT * FROM rsvp WHERE name LIKE ?;
+    public static final String SQL_SELECT_RSVP_BY_ID = """
+            SELECT * FROM rsvp WHERE rsvp_id = ?;
             """;
 
     public static final String SQL_INSERT_NEW_RSVP = """
             INSERT INTO rsvp(
-                name, email, phone, confirmDate, comments
+                rsvp_id, email, phone, confirmDate, comments
             )
             VALUES
                 (?,?, ?, ?, ?);
@@ -21,7 +21,7 @@ public class Queries {
 
     public static final String SQL_UPDATE_RSVP = """
                     UPDATE rsvp SET
-                    name = ?,
+                    rsvp_id = ?,
                     phone = ?,
                     confirmDate = ?,
                     comments = ?
