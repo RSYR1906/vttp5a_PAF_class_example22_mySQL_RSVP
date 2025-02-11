@@ -101,7 +101,7 @@ public class RsvpRestController {
 
         if (isUpdated) {
             log.info("RSVP updated successfully for email: {}", email);
-            return ResponseEntity.status(HttpStatus.OK).body("RSVP updated");
+            return ResponseEntity.status(HttpStatus.CREATED).body("RSVP updated");
         } else {
             log.warn("No RSVP found for email: {}", email);
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
