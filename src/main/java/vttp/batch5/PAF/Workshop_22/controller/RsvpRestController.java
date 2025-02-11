@@ -90,7 +90,7 @@ public class RsvpRestController {
 
         log.info("Received PUT request to update RSVP for email: {}", email);
         log.info("Parameters - name: {}, phone: {}, confirmDate: {}, comments: {}",
-                person.getName(), person.getPhone(), person.getConfirmDate(), person.getComments());
+                person.getName(), person.getEmail(), person.getPhone(), person.getConfirmDate(), person.getComments());
 
         boolean isUpdated = rsvpService.updateRsvp(
                 person.getName(),
