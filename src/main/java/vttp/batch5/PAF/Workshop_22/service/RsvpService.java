@@ -20,22 +20,22 @@ public class RsvpService {
         return rsvpRepo.getAllRSVP();
     }
 
-    public Optional<Person> getRSVPByid(String id) {
-        return rsvpRepo.getRSVPById(id);
+    public Optional<Person> getRSVPByName(String name) {
+        return rsvpRepo.getRSVPByName(name);
     }
 
-    public boolean addOrUpdateRsvp(String id, String email, String phone, Date confirmDate, String comments) {
+    public boolean addOrUpdateRsvp(String name, String email, String phone, Date confirmDate, String comments) {
+        email = email.trim(); // Ensure email consistency
+
         if (rsvpRepo.rsvpExists(email)) {
-            // Update existing RSVP
-            return rsvpRepo.updateRsvp(id, phone, confirmDate, comments, email);
+            return rsvpRepo.updateRsvp(name, email, phone, confirmDate, comments);
         } else {
-            // Insert new RSVP
-            return rsvpRepo.insertNewRsvp(id, email, phone, confirmDate, comments);
+            return rsvpRepo.insertNewRsvp(name, email, phone, confirmDate, comments);
         }
     }
 
-    public boolean updateRsvp(String id, String phone, Date confirmDate, String comments, String email) {
-        return rsvpRepo.updateRsvp(id, phone, confirmDate, comments, email);
+    public boolean updateRsvp(String name, String email, String phone, Date confirmDate, String comments) {
+        return rsvpRepo.updateRsvp(name, email, phone, confirmDate, comments);
     }
 
     public Integer getTotalRsvp() {

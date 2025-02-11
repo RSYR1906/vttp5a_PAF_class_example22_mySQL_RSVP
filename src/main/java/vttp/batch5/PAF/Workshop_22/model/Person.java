@@ -2,13 +2,16 @@ package vttp.batch5.PAF.Workshop_22.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 public class Person {
 
-    private String id;
+    private String name;
     private String email;
     private String phone;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date confirmDate;
     private String comments;
 
@@ -46,21 +49,20 @@ public class Person {
 
     public static Person toPerson(SqlRowSet rs) {
         Person person = new Person();
-        person.setId(rs.getString("id"));
+        person.setName(rs.getString("name"));
         person.setEmail(rs.getString("email"));
         person.setPhone(rs.getString("phone"));
         person.setConfirmDate(rs.getDate("confirmDate"));
         person.setComments(rs.getString("comments"));
-
         return person;
     }
 
-    public String getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
 }
